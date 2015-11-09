@@ -1,3 +1,3 @@
 Example of use
 --------------
-$ sudo ./compile_chromium_android.sh
+$ sudo ./compile_chromium_android.sh --lkgr
