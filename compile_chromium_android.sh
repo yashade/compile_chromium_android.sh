@@ -52,17 +52,6 @@ mkdir $CHROMIUM_DIR
 cd $CHROMIUM_DIR
 fetch --nohooks android
 
-# short hash of the latest commit
-LATEST_COMMIT="$(cd $CHROMIUM_DIR/src && git rev-parse --short HEAD && cd ../..)"
-
-# chromium version
-CHROMIUM_VER_FILE="$CHROMIUM_DIR/src/chrome/VERSION"
-VER_MAJOR="$(cat $CHROMIUM_VER_FILE | grep 'MAJOR=' | sed 's/MAJOR=//')"
-VER_MINOR="$(cat $CHROMIUM_VER_FILE | grep 'MINOR=' | sed 's/MINOR=//')"
-VER_BUILD="$(cat $CHROMIUM_VER_FILE | grep 'BUILD=' | sed 's/BUILD=//')"
-VER_PATCH="$(cat $CHROMIUM_VER_FILE | grep 'PATCH=' | sed 's/PATCH=//')"
-CHROMIUM_VER="$(echo $VER_MAJOR.$VER_MINOR.$VER_BUILD.$VER_PATCH)"
-
 # last known good revision
 CHROMIUM_LKGR="$(curl http://chromium-status.appspot.com/lkgr)"
 
@@ -103,6 +92,17 @@ DATE="$(date -u +%Y%m%d)"
 # build the full browser
 cd $CHROMIUM_DIR/src
 ninja -C out/Release chrome_public_apk
+
+# chromium version
+CHROMIUM_VER_FILE="$CHROMIUM_DIR/src/chrome/VERSION"
+VER_MAJOR="$(cat $CHROMIUM_VER_FILE | grep 'MAJOR=' | sed 's/MAJOR=//')"
+VER_MINOR="$(cat $CHROMIUM_VER_FILE | grep 'MINOR=' | sed 's/MINOR=//')"
+VER_BUILD="$(cat $CHROMIUM_VER_FILE | grep 'BUILD=' | sed 's/BUILD=//')"
+VER_PATCH="$(cat $CHROMIUM_VER_FILE | grep 'PATCH=' | sed 's/PATCH=//')"
+CHROMIUM_VER="$(echo $VER_MAJOR.$VER_MINOR.$VER_BUILD.$VER_PATCH)"
+
+# short hash of the latest commit
+LATEST_COMMIT="$(cd $CHROMIUM_DIR/src && git rev-parse --short HEAD && cd ../..)"
 
 # chromium apk filename
 CHROMIUM_APK_FILENAME="chromium-$CHROMIUM_VER-$DATE-$LATEST_COMMIT.apk"
