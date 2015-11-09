@@ -24,9 +24,9 @@ while [[ "$#" > 0 ]];
 done
 
 # directories
-CHROMIUM_DIR="~/chromium"
-CHROMIUM_OUT_DIR="~/chromium_builds"
-DEPOT_TOOLS_DIR="~/depot_tools"
+CHROMIUM_DIR="$HOME/chromium"
+CHROMIUM_OUT_DIR="$HOME/chromium_builds"
+DEPOT_TOOLS_DIR="$HOME/depot_tools"
 
 # colors
 GRN='\033[0;32m'
