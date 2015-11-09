@@ -61,7 +61,7 @@ if [ "$FLAG_LKGR" = 'y' ]; then
 fi
 
 # configure GYP
-if [ "$FLAG_ARCH_x86" = 'y' || "$FLAG_ARCH_MIPS" = 'y' ]; then
+if [ "$FLAG_ARCH_x86" = 'y' ] || [ "$FLAG_ARCH_MIPS" = 'y' ]; then
   if [ "$FLAG_ARCH_x86" = 'y' ]; then
     echo "{ 'GYP_DEFINES': 'OS=android target_arch=ia32', }" > chromium.gyp_env
   fi
