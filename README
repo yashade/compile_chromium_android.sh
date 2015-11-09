@@ -1,2 +1,3 @@
-# Example of use
-sudo ./compile_chromium_android.sh
+Example of use
+--------------
+$ sudo ./compile_chromium_android.sh
