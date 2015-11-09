@@ -26,17 +26,6 @@ done
 # last known good revision
 CHROMIUM_LKGR="$(curl http://chromium-status.appspot.com/lkgr)"
 
-# short hash of the latest commit
-LATEST_COMMIT="$(cd $CHROMIUM_DIR/src && git rev-parse --short HEAD && cd ../..)"
-
-# chromium version
-CHROMIUM_VER_FILE="$CHROMIUM_DIR/src/chrome/VERSION"
-VER_MAJOR="$(cat $CHROMIUM_VER_FILE | grep 'MAJOR=' | sed 's/MAJOR=//')"
-VER_MINOR="$(cat $CHROMIUM_VER_FILE | grep 'MINOR=' | sed 's/MINOR=//')"
-VER_BUILD="$(cat $CHROMIUM_VER_FILE | grep 'BUILD=' | sed 's/BUILD=//')"
-VER_PATCH="$(cat $CHROMIUM_VER_FILE | grep 'PATCH=' | sed 's/PATCH=//')"
-CHROMIUM_VER="$(echo $VER_MAJOR.$VER_MINOR.$VER_BUILD.$VER_PATCH)"
-
 # date
 DATE="$(date -u +%Y%m%d)"
 
@@ -71,6 +60,17 @@ export PATH=$PATH:$DEPOT_TOOLS_DIR
 mkdir $CHROMIUM_DIR
 cd $CHROMIUM_DIR
 fetch --nohooks android
+
+# short hash of the latest commit
+LATEST_COMMIT="$(cd $CHROMIUM_DIR/src && git rev-parse --short HEAD && cd ../..)"
+
+# chromium version
+CHROMIUM_VER_FILE="$CHROMIUM_DIR/src/chrome/VERSION"
+VER_MAJOR="$(cat $CHROMIUM_VER_FILE | grep 'MAJOR=' | sed 's/MAJOR=//')"
+VER_MINOR="$(cat $CHROMIUM_VER_FILE | grep 'MINOR=' | sed 's/MINOR=//')"
+VER_BUILD="$(cat $CHROMIUM_VER_FILE | grep 'BUILD=' | sed 's/BUILD=//')"
+VER_PATCH="$(cat $CHROMIUM_VER_FILE | grep 'PATCH=' | sed 's/PATCH=//')"
+CHROMIUM_VER="$(echo $VER_MAJOR.$VER_MINOR.$VER_BUILD.$VER_PATCH)"
 
 # check out LKGR
 if [ "$FLAG_LKGR" = 'y' ]; then
