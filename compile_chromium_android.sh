@@ -44,7 +44,7 @@ sudo apt-get upgrade -y
 sudo apt-get install openjdk-7-jdk git -y
 
 # install depot_tools
-git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $DEPOT_TOOLS_DIR
 export PATH=$PATH:$DEPOT_TOOLS_DIR
 
 # clone the chromium source code
