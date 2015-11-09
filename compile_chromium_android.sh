@@ -97,12 +97,12 @@ gclient runhooks
 # add aapt to PATH
 export PATH=$PATH:$CHROMIUM_DIR/src/third_party/android_tools/sdk/build-tools/*/
 
+# date
+DATE="$(date -u +%Y%m%d)"
+
 # build the full browser
 cd $CHROMIUM_DIR/src
 ninja -C out/Release chrome_public_apk
-
-# date
-DATE="$(date -u +%Y%m%d)"
 
 # chromium apk filename
 CHROMIUM_APK_FILENAME="chromium-$CHROMIUM_VER-$DATE-$LATEST_COMMIT.apk"
