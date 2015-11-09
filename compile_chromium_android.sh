@@ -23,15 +23,6 @@ while [[ "$#" > 0 ]];
         shift
 done
 
-# last known good revision
-CHROMIUM_LKGR="$(curl http://chromium-status.appspot.com/lkgr)"
-
-# date
-DATE="$(date -u +%Y%m%d)"
-
-# chromium apk filename
-CHROMIUM_APK_FILENAME="chromium-$CHROMIUM_VER-$DATE-$LATEST_COMMIT.apk"
-
 # directories
 CHROMIUM_DIR="~/chromium"
 CHROMIUM_OUT_DIR="~/chromium_builds"
@@ -72,6 +63,9 @@ VER_BUILD="$(cat $CHROMIUM_VER_FILE | grep 'BUILD=' | sed 's/BUILD=//')"
 VER_PATCH="$(cat $CHROMIUM_VER_FILE | grep 'PATCH=' | sed 's/PATCH=//')"
 CHROMIUM_VER="$(echo $VER_MAJOR.$VER_MINOR.$VER_BUILD.$VER_PATCH)"
 
+# last known good revision
+CHROMIUM_LKGR="$(curl http://chromium-status.appspot.com/lkgr)"
+
 # check out LKGR
 if [ "$FLAG_LKGR" = 'y' ]; then
   gclient sync --nohooks -r $CHROMIUM_LKGR
@@ -106,6 +100,12 @@ export PATH=$PATH:$CHROMIUM_DIR/src/third_party/android_tools/sdk/build-tools/*/
 # build the full browser
 cd $CHROMIUM_DIR/src
 ninja -C out/Release chrome_public_apk
+
+# date
+DATE="$(date -u +%Y%m%d)"
+
+# chromium apk filename
+CHROMIUM_APK_FILENAME="chromium-$CHROMIUM_VER-$DATE-$LATEST_COMMIT.apk"
 
 # grab the chromium apk
 cd
