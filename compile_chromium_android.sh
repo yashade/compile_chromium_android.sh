@@ -56,6 +56,9 @@ git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $DEPO
 export PATH=$PATH:$DEPOT_TOOLS_DIR
 
 # clone the chromium source code
+if [ -d $CHROMIUM_DIR ]; then
+  rm -rf $CHROMIUM_DIR
+fi
 mkdir $CHROMIUM_DIR
 cd $CHROMIUM_DIR
 fetch --nohooks android
