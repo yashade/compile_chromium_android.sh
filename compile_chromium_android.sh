@@ -49,7 +49,7 @@ sudo apt-get upgrade -y
 sudo apt-get install openjdk-7-jdk git -y
 
 # install depot_tools
-if [ ! -d $DEPOT_TOOLS_DIR ]; then
+if [ -d $DEPOT_TOOLS_DIR ]; then
   rm -rf $DEPOT_TOOLS_DIR
 fi
 git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $DEPOT_TOOLS_DIR
