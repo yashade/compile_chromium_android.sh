@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e && cd
 
+# example of use
+# root@jarvis:~# ./compile_chromium_android.sh --lkgr
+
 # parameters
 while [[ "$#" > 0 ]];
     do
