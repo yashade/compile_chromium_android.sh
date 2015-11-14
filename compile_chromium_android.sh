@@ -123,7 +123,8 @@ cd
 if [ ! -d $CHROMIUM_OUT_DIR ]; then
   mkdir $CHROMIUM_OUT_DIR
 fi
-cp $CHROMIUM_DIR/src/out/Release/apks/ChromePublic.apk $CHROMIUM_OUT_DIR/$CHROMIUM_APK_FILENAME
+CHROMIUM_OUT_APK=$CHROMIUM_OUT_DIR/$CHROMIUM_APK_FILENAME
+cp $CHROMIUM_DIR/src/out/Release/apks/ChromePublic.apk $CHROMIUM_OUT_APK
 
 # let the party begin
-echo && echo -e "${GRN}APK:${NRML} $CHROMIUM_OUT_DIR/$CHROMIUM_APK_FILENAME" && echo
+echo && echo -e "${GRN}APK:${NRML} $CHROMIUM_OUT_APK" && echo
