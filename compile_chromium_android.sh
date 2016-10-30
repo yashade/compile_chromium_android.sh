@@ -37,11 +37,7 @@ DEPOT_TOOLS_DIR="$HOME/depot_tools"
 GRN='\033[0;32m'
 NRML='\033[0m'
 
-# add some sources (for msttcorefonts)
-sudo echo 'deb http://us.archive.ubuntu.com/ubuntu/ trusty multiverse' >> /etc/apt/sources.list
-sudo echo 'deb-src http://us.archive.ubuntu.com/ubuntu/ trusty multiverse' >> /etc/apt/sources.list
-sudo echo 'deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse' >> /etc/apt/sources.list
-sudo echo 'deb-src http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse' >> /etc/apt/sources.list
+# update
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
@@ -71,28 +67,20 @@ if [ "$FLAG_LKGR" = 'y' ]; then
   gclient sync --nohooks -r $CHROMIUM_LKGR
 fi
 
-# configure GYP
-if [ "$FLAG_ARCH_x86" = 'y' ] || [ "$FLAG_ARCH_MIPS" = 'y' ]; then
-  if [ "$FLAG_ARCH_x86" = 'y' ]; then
-    echo "{ 'GYP_DEFINES': 'OS=android target_arch=ia32', }" > chromium.gyp_env
-  fi
-  if [ "$FLAG_ARCH_MIPS" = 'y' ]; then
-    echo "{ 'GYP_DEFINES': 'OS=android target_arch=mipsel', }" > chromium.gyp_env
-  fi
-else
-  echo "{ 'GYP_DEFINES': 'OS=android', }" > chromium.gyp_env
-fi
-
-# clear GYP_DEFINES environment variable
-unset GYP_DEFINES
+#
+# TODO: configure GN
+#
 
 # install build dependencies
 $CHROMIUM_DIR/src/build/install-build-deps.sh
 $CHROMIUM_DIR/src/build/install-build-deps-android.sh
 
 # android SDK
-$CHROMIUM_DIR/src/third_party/android_tools/sdk/tools/android update sdk --no-ui --filter 57
+$CHROMIUM_DIR/src/third_party/android_tools/sdk/tools/android update sdk --no-ui
 gclient runhooks
+
+# sync
+gclient sync
 
 # add aapt to PATH
 export PATH=$PATH:$CHROMIUM_DIR/src/third_party/android_tools/sdk/build-tools/*/
@@ -101,8 +89,9 @@ export PATH=$PATH:$CHROMIUM_DIR/src/third_party/android_tools/sdk/build-tools/*/
 DATE="$(date -u +%Y%m%d)"
 
 # build the full browser
+. build/android/envsetup.sh
 cd $CHROMIUM_DIR/src
-ninja -C out/Release chrome_public_apk
+ninja -C out/Default chrome_public_apk
 
 # chromium version
 CHROMIUM_VER_FILE="$CHROMIUM_DIR/src/chrome/VERSION"
