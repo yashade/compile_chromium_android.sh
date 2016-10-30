@@ -67,6 +67,7 @@ if [ "$FLAG_LKGR" = 'y' ]; then
   gclient sync --nohooks -r $CHROMIUM_LKGR
 fi
 
+# gclient sync
 #
 # TODO: configure GN
 #
