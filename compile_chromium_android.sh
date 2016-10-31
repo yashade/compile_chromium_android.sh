@@ -91,7 +91,7 @@ $CHROMIUM_DIR/src/build/install-build-deps.sh
 $CHROMIUM_DIR/src/build/install-build-deps-android.sh
 
 # android SDK
-$CHROMIUM_DIR/src/third_party/android_tools/sdk/tools/android update sdk --no-ui --filter 57
+$CHROMIUM_DIR/src/third_party/android_tools/sdk/tools/android update sdk --no-ui
 gclient runhooks
 
 # add aapt to PATH
